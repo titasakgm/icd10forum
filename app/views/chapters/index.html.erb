@@ -1,0 +1,22 @@
+<h1>Chapters</h1>
+
+<%= paginate @chapters %>
+<p>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Chapter No</th>
+      <th>Chapter Title</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @chapters.each do |chapter| %>
+      <tr>
+        <td><%= link_to chapter.chap_no, chapter_path(chapter) %></td>
+        <td><%= chapter.chap_title %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%# link_to 'New', new_chapter_path, :class => 'btn btn-primary' %>

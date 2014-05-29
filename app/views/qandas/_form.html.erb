@@ -1,0 +1,61 @@
+<%= simple_form_for @qanda, :html => { :class => 'form-horizontal' } do |f| %>
+  <fieldset>
+    <legend>เพิ่มข้อคำถามใหม่</legend>
+
+    <%# owner_id = current_user.id %>
+    <%# owner_email = current_user.email %>
+
+    <% owner_id = @qanda.id %>
+    <% owner_email = @qanda.email %>
+
+    <%= f.hidden_field :user_id,
+                       :value => owner_id
+    %>
+    <%= f.input "test", 
+                :label => "Email",
+                :input_html => {:value => owner_email},
+                :disabled => true
+    %>
+    <%= f.association :specialty,
+                      :collection => Specialty.order(:id),
+                      :label => 'สาขาเฉพาะทาง',
+                      :label_method => lambda { |b| "#{b.sp_code} : #{b.sp_name}" },
+                      :prompt => "กรุณาเลือก..."
+    %>
+    <%= f.input :qa_q,
+                :label => "คำถาม",
+                :as => :text,
+                :input_html => { :rows => 5, :style => "width:500px" }
+    %> 
+    <% if admin? or consultant? %>
+      <%= f.input :qa_a,
+               :label => "คำตอบ",
+               :as => :text,
+               :input_html => { :rows => 5, :style => "width:500px" }
+      %>
+      <%= f.input :qa_status,
+                  :as => :select,
+                  :collection => ['unassigned','consulting', 'answered'],
+                  :label => "สถานะ"
+      %>
+      <%= f.input :qa_consultant,
+                  :label => "ปรึกษาผู้เชี่ยวชาญ",
+                  :collection => User.where(:role => "consultant"),
+                  :label_method => lambda { |u| u.fullname }
+      %>
+    <% else %>
+      <%= f.input :qa_status,
+                  :as => :hidden,
+                  :input_html => { :value => 'unassigned' }
+      %>
+    <% end %>
+
+    <div class="form-actions">
+      <%= f.submit 'บันทึกข้อมูล', :class => 'btn btn-primary' %>
+      <%= link_to 'ยกเลิก', qandas_path, :class => 'btn' %>
+    </div>
+    <% if current_user.role == 'admin' %>
+      <div class='alert alert-info'>ระบบจะทำการแจ้งเตือน email ไปยังผู้เชี่ยวชาญ กรณีเลือก consulting</div>
+    <% end %>
+  </fieldset>
+<% end %>

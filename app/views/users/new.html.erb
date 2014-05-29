@@ -1,0 +1,17 @@
+<h1>Registration</h1>
+
+<%= simple_form_for @user do |f| %>
+  <%= f.input :email %>
+  <%= f.input :prename, :label => "คำนำหน้า", :width => 20 %> <%= f.input :fname, :label => "ชื่อ" %>
+  <%= f.input :lname, :label => "นามสกุล" %>
+  <%= f.input :mobile, :label => "เบอร์มือถือ" %>
+  <% if admin? %>
+    <%= f.select :role, ['member','consultant', 'admin'] %>
+  <% else %>
+    <%= f.hidden_field :role, :value => 'member' %>
+  <% end %>
+  <%= f.input :password %>
+  <%= f.input :password_confirmation %>
+
+  <%= f.button :submit %>
+<% end %>

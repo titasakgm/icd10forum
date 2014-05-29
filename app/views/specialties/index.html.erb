@@ -1,0 +1,26 @@
+<h1>Specialties</h1>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Sp code</th>
+      <th>Created at</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @specialties.each do |specialty| %>
+      <tr>
+        <td><%= specialty.id %></td>
+        <td><%= link_to specialty.sp_code, specialty_path(specialty) %></td>
+        <td><%= specialty.created_at %></td>
+        <td>
+          <%= link_to 'Edit', edit_specialty_path(specialty), :class => 'btn btn-mini' %>
+          <%= link_to 'Destroy', specialty_path(specialty), :method => :delete, :confirm => 'Are you sure?', :class => 'btn btn-mini btn-danger' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to 'New', new_specialty_path, :class => 'btn btn-primary' %>

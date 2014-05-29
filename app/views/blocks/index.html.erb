@@ -1,0 +1,24 @@
+<h1>Blocks</h1>
+
+<%= paginate @blocks %>
+<p>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Chapter</th>
+      <th>Block No</th>
+      <th>Block Title</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @blocks.each do |block| %>
+      <tr>
+        <td><%= link_to block.chapter_id, block_path(block) %></td>
+        <td><%= block.block_no %></td>
+        <td><%= block.block_title %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%# link_to 'New', new_block_path, :class => 'btn btn-primary' %>

@@ -1,0 +1,12 @@
+class UserMailer < ActionMailer::Base
+  def consultant_reminder(user)
+    default from: "icd10forum@thcc.or.th"
+
+    @user = user
+    mail( :from => "admin@thcc.or.th",
+          :to => ["#{user.fname} <#{user.email}>","Dr.Titasak <titasak@gmail.com>"],
+          :subject => "ICD10Forum Notification"
+        )
+  end
+end
+

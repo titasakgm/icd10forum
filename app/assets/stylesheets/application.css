@@ -1,0 +1,88 @@
+/*
+ * This is a manifest file that'll automatically include all the stylesheets available in this directory
+ * and any sub-directories. You're free to add application-wide styles to this file and they'll appear at
+ * the top of the compiled file, but it's generally better to create a new file per style scope.
+ *= require_self
+ *= require_tree . 
+*/
+
+body { 
+  padding: 20px;
+  width: 1170px !important;
+}
+  
+.navbar-search {
+    position: relative;
+}
+  
+.navbar-search .search-query {
+    padding-left: 29px;
+}
+
+.navbar-search .icon-search {
+    position: absolute;
+    top: 7px;
+    left: 11px;
+    background-image: url("http://twitter.github.com/bootstrap/assets/img/glyphicons-halflings-white.png");
+}
+
+.navbar-search .search-query:focus, .navbar-search .search-query.focused {
+    padding-left: 30px;
+}
+
+.search-query:focus + .icon-search {
+    background-image: url("http://twitter.github.com/bootstrap/assets/img/glyphicons-halflings.png");
+}
+
+.unassinged {
+  color: red;
+}
+
+.consulting {
+  color: brown;
+}
+
+.answered {
+  color: green;
+}
+
+.admin {
+  background-color: #f00;
+}
+
+.member {
+  background-color: #050;
+}
+
+.consultant {
+  background-color: #00f;
+}
+
+#faq_faq_q #faq_faq_a {
+  width: 200;
+  height: 100;
+}
+
+.center {
+  text-align: center;
+}
+
+.image-3 {
+  height: 127px;
+  width: 892px;
+  background: url(assets/header_forum.jpg);
+}
+
+.nav-link {
+  float: right;
+  padding:5px 10px 0px 0px;
+  text-decoration: none;
+}
+A:link {text-decoration: none}
+A:visited {text-decoration: none}
+A:active {text-decoration: none}
+A:hover {text-decoration: underline overline; color: red;}
+
+.container, .navbar-static-top .container, .navbar-fixed-top .container, .navbar-fixed-bottom .container {
+  width:1170px !important; margin-left: 20px !important; margin-right: 20px !important;
+}

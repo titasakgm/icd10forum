@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Icd10forum</title>
+  <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode/svn/trunk/html5.js" type="text/javascript"></script>
+  <![endif]-->
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+<div class="navbar navbar-fixed-top">
+  <div class="navbar-inner">
+    <div class="container">
+      <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </a>
+      <a class="brand" href="/">ICD10Forum</a>
+      <div class="nav-collapse">
+        <ul class="nav">
+          <% if current_user %>
+            <% if admin? %>
+              <li class="divider-vertical"></li>
+              <li><%= link_to "สมาชิก", users_path %></li>
+              <li class="divider-vertical"></li>
+              <li><%= link_to "สาขาเฉพาะทาง", specialties_path %></li>
+            <% end %>
+            <li class="divider-vertical"></li>
+            <li><%= link_to "Q&A", qandas_path %></li>
+          <% end %>
+          <li class="divider-vertical"></li>
+          <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+              FAQs
+              <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+              <li><%= link_to "อายุรศาสตร์", "/faqs?specialty_id=1" %></li>
+              <li><%= link_to "ศัลยกรรม", "/faqs?specialty_id=3" %></li>
+              <li><%= link_to "สูตินรีเวชกรรม", "/faqs?specialty_id=2" %></li>
+              <li><%= link_to "อื่นๆ...", "/faqs?specialty_id=4" %></li>
+            </ul>
+          </li>          
+
+          <% if current_user && !admin? %>
+            <li class="divider-vertical"></li>
+            <li class="dropdown">
+              <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                ICD10 Codes
+                <b class="caret"></b>
+              </a>
+              <ul class="dropdown-menu">
+                <li><%= link_to "Chapters", chapters_path %></li>
+                <li><%= link_to "Blocks", blocks_path %></li>
+                <li><%= link_to "Codes", codes_path %></li>
+              </ul>
+            </li>
+          <% end %>
+          <li class="divider-vertical"></li>
+          <form class="navbar-search" id="search">
+            <input type="text" id="q" class="search-query span3"
+             placeholder="Search" values="<%= params[:q] %>">
+          </form>
+        </ul>
+        <ul class="nav pull-right">
+          <% if current_user %>
+            <% if admin? %>
+              <li class="admin">
+            <% else %>
+              <li class="member">
+            <% end %>
+              <%= link_to "#{current_user.fullname}", "#" %>
+            </li>
+            <!-- li class="divider-vertical"></li //-->
+            <li><%= link_to "Logout", logout_path %></li>
+          <% else %>
+            <li class="divider-vertical"></li>
+            <li><%= link_to "Register", signup_path %></li>
+            <li class="divider-vertical"></li>
+            <li><%= link_to "Login", login_path %></li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+<div>
+<div class="container">
+  <% flash.each do |name, msg| %>
+    <div class="alert alert-<%= name == :notice ? 'success' : 'error' %>">
+      <a class="close" data-dismiss="alert">&otimes;</a>
+      <%= msg %>
+    </div>
+  <% end %>
+  <%= yield %>
+</div>
+</div>
+</body>
+</html>
+

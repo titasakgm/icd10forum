@@ -1,0 +1,37 @@
+<h1>Q&A</h1>
+
+<p>
+  <b>Email</b><br>
+  <%= @qanda.user.email %>
+</p>
+
+<p>
+  <b>สาขา</b><br>
+  <%= @qanda.specialty.sp_name %>
+</p>
+
+<p>
+  <b>คำถาม</b><br>
+  <%= @qanda.qa_q %>
+</p>
+
+<p>
+  <b>คำตอบ</b><br>
+  <%= @qanda.qa_a %>
+</p>
+
+<p>
+  <b>สถานะ</b><br>
+  <%= @qanda.qa_status %>
+</p>
+
+<p>
+  <b>Consultant</b><br>
+  <%= User.find(@qanda.qa_consultant).fullname if @qanda.qa_status == "consulting" %>
+</p>
+
+<div class="form-actions">
+  <%= link_to 'Back', qandas_path, :class => 'btn'  %>
+  <%= link_to 'Edit', edit_qanda_path(@qanda), :class => 'btn' %>
+  <%= link_to 'Delete', qanda_path(@qanda), :method => 'delete', :confirm => 'Are you sure?', :class => 'btn btn-danger' %>
+</div>

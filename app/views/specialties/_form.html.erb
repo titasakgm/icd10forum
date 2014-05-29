@@ -1,0 +1,18 @@
+<%= simple_form_for @specialty, :html => { :class => 'form-horizontal' } do |f| %>
+  <fieldset>
+    <legend><%= controller.action_name.capitalize %> /Specialty</legend>
+
+    <%= f.input :sp_code %>
+    <%= f.input :sp_name %>
+    <%= f.association :user, 
+                      :collection => User.where("role = 'consultant'").order(:id), 
+                      :label_method => lambda { |u| "#{u.prename}#{u.fname} #{u.lname}" },
+                      :prompt => "Choose a consultant" %>
+
+    <div class="form-actions">
+      <%= f.submit nil, :class => 'btn btn-primary' %>
+      <%= link_to 'Cancel', specialties_path, :class => 'btn' %>
+    </div>
+  </fieldset>
+<% end %>
+
